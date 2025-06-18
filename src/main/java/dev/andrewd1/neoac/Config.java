@@ -23,17 +23,23 @@ public class Config {
                      "be printed to the log and the configuration file will update to reflect the change if \"auto_updat" +
                      "e_mod_allowlist = true\". You probably shouldn't edit this manually.")
             .defineListAllowEmpty("mod_allowlist", new ArrayList<>(), () -> "", Config::validateModAllowlist);
+    private static final ModConfigSpec.IntValue MOD_LIST_MAX_WAIT_TIME = BUILDER
+            .comment(" The maximum amount of time to wait for a client to send their mod list to the server. Setting it " +
+                     "too low may lead to players being kicked when they join.")
+            .defineInRange("max_client_wait_duration", 10, 0, 120);
 
     static final ModConfigSpec SPEC = BUILDER.build();
 
     public static boolean autoUpdateModAllowlist = false;
     public static final HashMap<String, String> modAllowlist = new HashMap<>();
+    public static int modListWaitDuration = 10;
 
     public static final List<String> violations = new ArrayList<>();
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event) {
         autoUpdateModAllowlist = AUTO_UPDATE_MOD_ALLOWLIST.get();
+        modListWaitDuration = MOD_LIST_MAX_WAIT_TIME.get();
         modAllowlist.clear();
         violations.clear();
         for (var entry : MOD_ALLOWLIST.get()) {

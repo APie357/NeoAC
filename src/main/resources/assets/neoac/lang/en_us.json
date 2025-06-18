@@ -1,4 +1,5 @@
 {
   "neoac.configuration.auto_update_mod_allowlist": "Auto Update Mod Allowlist",
-  "neoac.configuration.mod_allowlist": "Mod Allowlist"
+  "neoac.configuration.mod_allowlist": "Mod Allowlist",
+  "neoac.configuration.max_client_wait_duration": "Client Wait Duration"
 }

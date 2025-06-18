@@ -1,4 +1,6 @@
 # NeoAC
+
+### ⚠️ ALPHA: Things may break! Do not use this in production.
 An anticheat for modern modded Minecraft servers running on NeoForge.
 
 Download on [Modrinth](https://modrinth.com/mod/neoac)
@@ -6,7 +8,7 @@ Download on [Modrinth](https://modrinth.com/mod/neoac)
 ## Features
  - [x] Mod ID and hash checks
  - [ ] Multiple hashes for files
- - [ ] Prevent login without the mod
+ - [x] Prevent login without the mod
  - [ ] Resource pack checks
  - [ ] Log incidents
    - [ ] File

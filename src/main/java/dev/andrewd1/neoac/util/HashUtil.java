@@ -1,8 +1,6 @@
 package dev.andrewd1.neoac.util;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
@@ -32,8 +30,10 @@ public class HashUtil {
 
     public static String bytesToHex(byte[] hash) {
         StringBuilder sb = new StringBuilder();
-        for (byte b : hash) {
-            sb.append(String.format("%02x", b));
+        if (hash != null) {
+            for (byte b : hash) {
+                sb.append(String.format("%02x", b));
+            }
         }
         return sb.toString();
     }

@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
@@ -142,6 +143,11 @@ public record ModListPayload(Map<String, String> mods, int chunkIndex, int total
     }
 
     private static void processCompleteModList(Map<String, String> mods, IPayloadContext context) {
+        NeoAC.LOGGER.info("Received mod list from client");
+        ServerPlayer player = (ServerPlayer) context.player();
+        NeoAC.playerModListDisconnectTimer.get(player).cancel();
+        NeoAC.playerModListDisconnectTimer.remove(player);
+
         List<String> violatingMods = new ArrayList<>();
         for (String id : mods.keySet()) {
             if (!Config.modAllowlist.containsKey(id) || !Objects.equals(mods.get(id), Config.modAllowlist.get(id))) {
